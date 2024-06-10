@@ -176,4 +176,12 @@ class AdminController {
         // On redirige vers la page d'administration.
         Utils::redirect("admin");
     }
+
+    public function monitoringArticles() : void
+    {
+
+        $view = new View("Edition d'un article");
+        $view->render("monitoringArticles", []);
+
+    }
 }

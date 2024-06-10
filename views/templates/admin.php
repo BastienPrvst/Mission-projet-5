@@ -1,4 +1,4 @@
-<?php 
+<?php
     /** 
      * Affichage de la partie admin : liste des articles avec un bouton "modifier" pour chacun. 
      * Et un formulaire pour ajouter un article. 
@@ -16,6 +16,10 @@
             <div><a class="submit" href="index.php?action=deleteArticle&id=<?= $article->getId() ?>" <?= Utils::askConfirmation("Êtes-vous sûr de vouloir supprimer cet article ?") ?> >Supprimer</a></div>
         </div>
     <?php } ?>
+</div>
+
+<div>
+    <a class="info" href="index.php?action=monitoringArticles">Click ici</a>
 </div>
 
 <a class="submit" href="index.php?action=showUpdateArticleForm">Ajouter un article</a>

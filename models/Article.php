@@ -9,6 +9,7 @@
     private int $idUser;
     private string $title = "";
     private string $content = "";
+    private ?int $views = null;
     private ?DateTime $dateCreation = null;
     private ?DateTime $dateUpdate = null;  
 
@@ -79,6 +80,16 @@
         return $this->content;
     }
 
+     public function getViews(): ?int
+     {
+         return $this->views;
+     }
+
+     public function setViews(?int $views): void
+     {
+         $this->views = $views;
+     }
+
     /**
      * Setter pour la date de création. Si la date est une string, on la convertit en DateTime.
      * @param string|DateTime $dateCreation
@@ -127,4 +138,5 @@
     {
         return $this->dateUpdate;
     }
+
  }
