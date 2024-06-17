@@ -11,7 +11,7 @@
         <tr>
             <th>Titre</th>
             <th>Nbr. Vues</th>
-<!--            <th>Nbr. Commentaires</th>-->
+            <th>Nbr. Commentaires</th>
             <th>Date de publication</th>
         </tr>
     </thead>
@@ -22,7 +22,8 @@
             <tr>
                 <td><?= $article->getTitle()?></td>
                 <td><?= $article->getViews()?></td>
-                <td><?= $article->getDateCreation()->format("Y-m-d")?></td>
+                <td><?= $article->comment_count?></td>
+                <td><?= $article->getDateCreation()->format("d-m-Y")?></td>
             </tr>
 
         <?php } ?>

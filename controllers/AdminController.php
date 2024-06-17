@@ -179,6 +179,7 @@ class AdminController {
 
     public function monitoringArticles() : void
     {
+        $this->checkIfUserIsConnected();
 
         $articleManager = new ArticleManager();
         $allArticles = $articleManager->getAllArticles();

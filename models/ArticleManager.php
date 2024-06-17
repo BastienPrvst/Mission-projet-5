@@ -11,13 +11,31 @@ class ArticleManager extends AbstractEntityManager
      */
     public function getAllArticles() : array
     {
-        $sql = "SELECT * FROM article";
+        // Changement de la requete sql pour récuperer le nombre de commentaire distinct par article
+        $sql = <<<EOD
+            SELECT
+            a.id,
+            a.title,
+            a.content,
+            a.views,
+            a.date_creation,
+            a.date_update,
+            COUNT(DISTINCT c.id) AS comment_count
+            FROM article a
+                     LEFT JOIN comment c
+                               ON c.id_article = a.id
+            GROUP BY a.id, a.title, a.content, a.views, a.date_creation, a.date_update
+        EOD;
+
         $result = $this->db->query($sql);
         $articles = [];
 
         while ($article = $result->fetch()) {
-            $articles[] = new Article($article);
+            $newArticle = new Article($article);
+            $newArticle->comment_count = $article['comment_count'];
+            $articles[] = $newArticle;
         }
+
         return $articles;
     }
     
@@ -99,4 +117,5 @@ class ArticleManager extends AbstractEntityManager
         $this->db->query($sql, ['id' => $id]);
 
     }
+    
 }
