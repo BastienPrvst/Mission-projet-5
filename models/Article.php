@@ -87,7 +87,7 @@
 
      public function setViews(?int $views): void
      {
-         $this->views = $views;
+         $this->views =+ $views;
      }
 
     /**

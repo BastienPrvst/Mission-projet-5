@@ -180,8 +180,13 @@ class AdminController {
     public function monitoringArticles() : void
     {
 
-        $view = new View("Edition d'un article");
-        $view->render("monitoringArticles", []);
+        $articleManager = new ArticleManager();
+        $allArticles = $articleManager->getAllArticles();
+
+        $view = new View("Détail des articles");
+        $view->render("monitoringArticles", [
+            'articles' => $allArticles,
+        ]);
 
     }
 }
