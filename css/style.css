@@ -350,3 +350,47 @@ footer {
     color: white;
     background-color: var(--headerColor);
 }
+
+/*Modifications Bastien*/
+
+/*Tableau détail*/
+
+
+.admin-table,
+.admin-table thead
+{
+    width: 100%;
+    max-width: 1366px;
+    border-collapse: collapse;
+}
+
+.admin-table tbody tr td
+{
+    text-align: center;
+    border: solid 1px black;
+    padding: 5px;
+}
+
+.admin-table tbody tr:nth-child(even)
+{
+    background-color: #f1f0eb;
+}
+.admin-table tbody tr:nth-child(odd)
+{
+    background-color: #efe1ba;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

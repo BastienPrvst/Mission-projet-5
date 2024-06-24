@@ -9,8 +9,18 @@ class ArticleManager extends AbstractEntityManager
      * Récupère tous les articles.
      * @return array : un tableau d'objets Article.
      */
-    public function getAllArticles() : array
+    public function getAllArticles(?string $key = null, ?bool $desc = null) : array
     {
+        $way = 'ASC';
+        //Si $desc est true on modifie la variable en DESC
+        if ($desc) {
+            $way = 'DESC';
+        }
+        //Si nous ne mettons pas de colonne en parametre nous avons le comportement par défaut
+        if (!isset($key)){
+            $key = 'id';
+        }
+
         // Changement de la requete sql pour récuperer le nombre de commentaire distinct par article
         $sql = <<<EOD
             SELECT
@@ -25,11 +35,12 @@ class ArticleManager extends AbstractEntityManager
                      LEFT JOIN comment c
                                ON c.id_article = a.id
             GROUP BY a.id, a.title, a.content, a.views, a.date_creation, a.date_update
+            ORDER BY $key $way
         EOD;
 
         $result = $this->db->query($sql);
         $articles = [];
-
+        //Nous devons autoriser la classe à avoir des propriétés dynamiques avec #[AllowDynamicProperties]
         while ($article = $result->fetch()) {
             $newArticle = new Article($article);
             $newArticle->comment_count = $article['comment_count'];
@@ -38,7 +49,7 @@ class ArticleManager extends AbstractEntityManager
 
         return $articles;
     }
-    
+
     /**
      * Récupère un article par son id.
      * @param int $id : l'id de l'article.

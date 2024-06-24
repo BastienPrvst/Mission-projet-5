@@ -177,13 +177,11 @@ class AdminController {
         Utils::redirect("admin");
     }
 
-    public function monitoringArticles() : void
+    public function monitoringArticles(?string $key = null, ?bool $type = false) : void
     {
         $this->checkIfUserIsConnected();
-
         $articleManager = new ArticleManager();
-        $allArticles = $articleManager->getAllArticles();
-
+        $allArticles = $articleManager->getAllArticles($key, $type);
         $view = new View("Détail des articles");
         $view->render("monitoringArticles", [
             'articles' => $allArticles,

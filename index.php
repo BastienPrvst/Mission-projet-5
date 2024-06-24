@@ -76,7 +76,20 @@ try {
 
         case 'monitoringArticles':
             $adminController = new AdminController();
-            $adminController->monitoringArticles();
+
+            if (Utils::request('key') !== null){
+                $key = Utils::request('key');
+            }else{
+                $key = null;
+            }
+
+            if (Utils::request('type') !== null){
+                $type = Utils::request('type', 'false') === 'true';;
+            }else{
+                $type = null;
+            }
+
+            $adminController->monitoringArticles($key, $type);
             break;
 
         default:
