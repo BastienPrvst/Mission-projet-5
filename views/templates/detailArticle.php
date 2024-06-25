@@ -24,6 +24,7 @@
         if (empty($comments)) {
             echo '<p class="info">Aucun commentaire pour cet article.</p>';
         } else {
+
             echo '<ul>';
             foreach ($comments as $comment) {
                 echo '<li>';
@@ -33,6 +34,15 @@
                 echo '      <p class="content">' . Utils::format($comment->getContent()) . '</p>';
                 echo '  </div>';
                 echo '</li>';
+
+                if (isset($_SESSION['user'])){
+                    $url = "index.php?action=deleteComment&id=" . urlencode($comment->getId()) . "&articleId=" . urlencode($article->getId());
+                    ?>
+                    <a href="<?= $url ?>"><i class="fa-regular fa-circle-xmark"></i></a>
+                    <?php
+                }
+
+                echo '</a>';
             }               
             echo '</ul>';
         } 

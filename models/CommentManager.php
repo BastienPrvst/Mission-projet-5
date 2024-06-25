@@ -62,7 +62,8 @@ class CommentManager extends AbstractEntityManager
     public function deleteComment(Comment $comment) : bool
     {
         $sql = "DELETE FROM comment WHERE id = :id";
-        $result = $this->db->query($sql, ['id' => $comment->getId()]);
+        $result = $this->db->query($sql,
+            ['id' => $comment->getId()]);
         return $result->rowCount() > 0;
     }
 

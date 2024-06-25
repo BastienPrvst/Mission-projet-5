@@ -7,10 +7,21 @@
  
 class Comment extends AbstractEntity 
 {
+    protected int $id;
     private int $idArticle;
     private string $pseudo;
     private string $content;
     private DateTime $dateCreation;
+
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
     
     /**
      * Getter pour l'id de l'article.

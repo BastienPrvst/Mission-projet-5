@@ -177,6 +177,24 @@ class AdminController {
         Utils::redirect("admin");
     }
 
+    public function deleteComment($id, $article) : void
+    {
+        $this->checkIfUserIsConnected();
+        if ($id === null
+            || !intval($id)
+            || $id < 0)
+        {
+            return;
+        }
+
+        $commentManager = new CommentManager();
+        $commentToDelete = $commentManager->getCommentById($id);
+        $result = $commentManager->deleteComment($commentToDelete);
+        if ($result === true){
+            Utils::redirect("showArticle", ['id' => $article]);
+        }
+    }
+
     public function monitoringArticles(?string $key = null, ?bool $type = false) : void
     {
         $this->checkIfUserIsConnected();
