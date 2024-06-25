@@ -74,28 +74,13 @@ try {
             break;
 
         case 'deleteComment':
-            $id = Utils::request('id');
-            $article = Utils::request('articleId');
             $commentController = new AdminController();
-            $commentController->deleteComment($id, $article);
+            $commentController->deleteComment();
             break;
 
         case 'monitoringArticles':
             $adminController = new AdminController();
-
-            if (Utils::request('key') !== null){
-                $key = Utils::request('key');
-            }else{
-                $key = null;
-            }
-
-            if (Utils::request('type') !== null){
-                $type = Utils::request('type', 'false') === 'true';;
-            }else{
-                $type = null;
-            }
-
-            $adminController->monitoringArticles($key, $type);
+            $adminController->monitoringArticles();
             break;
 
         default:

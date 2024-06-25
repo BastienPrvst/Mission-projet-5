@@ -9,17 +9,17 @@ class ArticleManager extends AbstractEntityManager
      * Récupère tous les articles.
      * @return array : un tableau d'objets Article.
      */
-    public function getAllArticles(?string $key = null, ?bool $desc = null) : array
+    public function getAllArticles(?string $key = null, ?string $order = null) : array
     {
-        $way = 'ASC';
-        //Si $desc est true on modifie la variable en DESC
-        if ($desc) {
-            $way = 'DESC';
-        }
-        //Si nous ne mettons pas de colonne en parametre nous avons le comportement par défaut
-        if (!isset($key)){
-            $key = 'id';
-        }
+        $possibleKeys = [
+            'title',
+            'views',
+            'comment_count',
+            'date_creation'
+        ];
+        $key = $key ?? '';
+        $orderKey = in_array(strtolower($key), $possibleKeys) ? $key : 'id';
+        $orderType = $order === 'DESC' ? 'DESC' : 'ASC';
 
         // Changement de la requete sql pour récuperer le nombre de commentaire distinct par article
         $sql = <<<EOD
@@ -35,7 +35,7 @@ class ArticleManager extends AbstractEntityManager
                      LEFT JOIN comment c
                                ON c.id_article = a.id
             GROUP BY a.id, a.title, a.content, a.views, a.date_creation, a.date_update
-            ORDER BY $key $way
+            ORDER BY $orderKey $orderType
         EOD;
 
         $result = $this->db->query($sql);

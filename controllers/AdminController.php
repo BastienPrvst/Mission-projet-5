@@ -177,16 +177,17 @@ class AdminController {
         Utils::redirect("admin");
     }
 
-    public function deleteComment($id, $article) : void
+    public function deleteComment() : void
     {
         $this->checkIfUserIsConnected();
+        $id = Utils::request('id');
+        $article = Utils::request('articleId');
         if ($id === null
             || !intval($id)
             || $id < 0)
         {
             return;
         }
-
         $commentManager = new CommentManager();
         $commentToDelete = $commentManager->getCommentById($id);
         $result = $commentManager->deleteComment($commentToDelete);
@@ -195,11 +196,14 @@ class AdminController {
         }
     }
 
-    public function monitoringArticles(?string $key = null, ?bool $type = false) : void
+    public function monitoringArticles() : void
     {
+        $orderKey = Utils::request('key')?? null;
+        $orderType = Utils::request('type')?? null;
+
         $this->checkIfUserIsConnected();
         $articleManager = new ArticleManager();
-        $allArticles = $articleManager->getAllArticles($key, $type);
+        $allArticles = $articleManager->getAllArticles($orderKey, $orderType);
         $view = new View("Détail des articles");
         $view->render("monitoringArticles", [
             'articles' => $allArticles,

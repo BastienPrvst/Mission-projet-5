@@ -38,11 +38,9 @@
                 if (isset($_SESSION['user'])){
                     $url = "index.php?action=deleteComment&id=" . urlencode($comment->getId()) . "&articleId=" . urlencode($article->getId());
                     ?>
-                    <a href="<?= $url ?>"><i class="fa-regular fa-circle-xmark"></i></a>
+                    <a href="<?= $url ?>"><i class="fa-regular delete-cross fa-circle-xmark"></i></a>
                     <?php
                 }
-
-                echo '</a>';
             }               
             echo '</ul>';
         } 

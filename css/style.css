@@ -380,6 +380,14 @@ footer {
     background-color: #efe1ba;
 }
 
+.delete-cross {
+    color: #f13c1f;
+    font-size: 20px;
+    position: relative;
+    left: 1100px;
+    bottom: 50px;
+}
+
 
 
 
